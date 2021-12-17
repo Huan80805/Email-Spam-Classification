@@ -39,17 +39,18 @@ if args.feature_selection:
         print('Features:', train_x.columns[features])
         predict = GA.predict(test_x.values[:, features])
         print('Acc:', 100.*(np.mean(predict==test_y)))
-if args.NB:
-    clf = MultinomialNB(alpha=1.9)
-elif args.KNN:
-    clf = KNN(n_neighbors=5) #tune:weights, p
-elif args.SVM:
-    clf = svm.SVC(kernel='linear') #tune:rbf kernel, sigmoid
-else:
-    sys.exit('must specify classifier')
-clf.fit(train_x, train_y)
-predict = clf.predict(test_x)
-print('Acc:', 100.*(np.mean(predict==test_y)))
+else: 
+    if args.NB:
+        clf = MultinomialNB(alpha=1.9)
+    elif args.KNN:
+        clf = KNN(n_neighbors=5) #tune:weights, p
+    elif args.SVM:
+        clf = svm.SVC(kernel='linear') #tune:rbf kernel, sigmoid
+    else:
+        sys.exit('must specify classifier')
+    clf.fit(train_x, train_y)
+    predict = clf.predict(test_x)
+    print('Acc:', 100.*(np.mean(predict==test_y)))
 
 
 
